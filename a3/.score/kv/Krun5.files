@@ -1,0 +1,23 @@
+test3.in: 1: # Comments should be ignored
+test3.in: 2: 
+test3.in: 3: 
+test3.in: 4: also ignore blank lines
+also: key not found
+ignore: key not found
+blank: key not found
+lines: key not found
+test3.in: 5: this file contains nonexistent keys
+this: key not found
+file: key not found
+contains: key not found
+nonexistent: key not found
+keys: key not found
+test3.in: 6: all output should be error messages
+all: key not found
+output: key not found
+should: key not found
+be: key not found
+error: key not found
+messages: key not found
+test3.in: 7: # $Id: test3.in,v 1.1 2010-02-09 20:31:28-08 - - $
+EXIT_SUCCESS

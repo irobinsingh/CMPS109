@@ -1,0 +1,37 @@
+-: 1: key=value
+key = value
+-: 2: second=third
+second = third
+-: 3: foo=bar
+foo = bar
+-: 4: f1=51
+f1 = 51
+-: 5: f2=52
+f2 = 52
+-: 6: foobar=baz
+foobar = baz
+-: 7: baz=quux
+baz = quux
+-: 8: this=is=a=test
+this = is=a=test
+-: 9: =
+{f1,51}
+{f2,52}
+{foo,bar}
+{foobar,baz}
+{this,is=a=test}
+{baz,quux}
+{second,third}
+{key,value}
+
+-: 10: a=value
+a = value
+-: 11: b=value
+b = value
+-: 12: =value
+{key,value}
+{a,value}
+{b,value}
+-: 13: # $Id: test2.in,v 1.1 2010-02-09 20:31:28-08 - - $
+-: 14: 
+EXIT_SUCCESS

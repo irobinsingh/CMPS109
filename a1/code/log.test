@@ -1,0 +1,99 @@
+./yshell build Jul  6 2014 06:18:13
+%  pwd
+/
+%  ls
+/
+1 2 . 
+1 2 .. 
+
+%  make foo this is a test
+%  make bar test a is this
+%  ls
+/
+1 4 . 
+1 4 .. 
+3 4 bar 
+2 4 foo 
+
+%  cat food
+%  cat foo
+this is a test 
+%  echo O for a muse of fire
+O for a muse of fire 
+%  prompt =>
+=> rm bar
+=> make baz foo bar baz
+=> mkdir test
+=> prompt % 
+% ls /
+/
+1 5 . 
+1 5 .. 
+4 3 baz 
+2 4 foo 
+5 2 test 
+
+% cd test
+% pwd
+/test/
+% cd
+% pwd
+/test/
+% cd test
+% pwd
+/test/
+% cd ..
+% pwd
+/
+% cd test
+% make me me me me
+% cat me
+me me me 
+% cd ..
+% cd test
+% cat me
+me me me 
+% me me me
+% cd
+% lsr
+/test/
+5 3 . 
+1 5 .. 
+6 3 me 
+
+% cd test
+% mkdir foo
+% cd foo
+% mkdir bar
+% cd bar
+% mkdir baz
+% cd baz
+% ls .
+/test/foo/bar/baz/
+9 2 . 
+8 3 .. 
+
+% cd /
+% lsr test
+/test/
+5 4 . 
+1 5 .. 
+7 3 foo 
+6 3 me 
+
+/test/foo/
+7 3 . 
+5 4 .. 
+8 3 bar 
+
+/test/foo/bar/
+8 3 . 
+7 3 .. 
+9 2 baz 
+
+/test/foo/bar/baz/
+9 2 . 
+8 3 .. 
+
+% exit
+yshell: exit(1)

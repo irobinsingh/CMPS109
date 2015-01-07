@@ -1,0 +1,10 @@
+#!/bin/sh
+# $Id: mk.tests,v 1.5 2014-07-10 16:26:27-07 - - $
+./keyvalue <test1.in >Krun1.stdin 2>&1
+./keyvalue <test2.in >Krun2.stdin 2>&1
+./keyvalue test1.in >Krun3.files 2>&1
+./keyvalue test2.in >Krun4.files 2>&1
+./keyvalue test3.in >Krun5.files 2>&1
+./keyvalue test*in >Krun6.files 2>&1
+./keyvalue /no/such no//file/either >Krun7.nofiles 2>&1
+valgrind keyvalue test*.in >valgrind.out 2>&1

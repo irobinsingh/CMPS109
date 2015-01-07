@@ -1,0 +1,129 @@
+head	1.2;
+access;
+symbols;
+locks;
+comment	@// @;
+
+
+1.2
+date	2012.04.18.01.51.36;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2012.04.18.01.51.18;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@-
+@
+text
+@// $Id: powi.cpp,v 1.1 2012-04-17 18:51:18-07 - - $
+
+//
+// NAME
+//    powi - power function raising a double to an int power
+//
+// SYNOPSIS
+//    double powi (double base, int exponent);
+//
+// DESCRIPTION
+//    The powi() function computes the value of base raised to the
+//    power exponent.
+//
+// RETURN VALUES
+//    Upon successful completion, powi() returns the value of base
+//    raised to the power of exponent.  If exponent is 0, 1.0 is
+//    returned regardless of the value of base (a number, 0, NaN,
+//    or +-Infinity).  Otherwise multiplication and division are
+//    subject to the rules of IEEE-754 floating point arithmetic,
+//    for CPUs which support that.
+//
+// MATHEMATICS USED
+//    powi (x, - n)   => powi (1 / x, n)
+//    powi (x, 2 n)   => powi (x ** 2, n / 2)
+//    powi (x, n + 1) => x * powi (x, n)
+//    .EQ
+//    x sup { - n }   = { ( 1 / x ) ) } sup n
+//    x sup { 2 n }   = ( x sup 2 ) sup { n / 2 }
+//    x sup { n + 1 } = x ( x sup n )
+//    .EN
+//    $$
+//    x ^ { - n}    = { ( 1 / x ) } ^ n     \\
+//    x ^ { 2 n }   = ( x ^ 2 ) ^ ( n / 2 ) \\
+//    x ^ { n + 1 } = x ( x ^ n )
+//    $$
+//
+//
+
+#include <cstdlib>
+#include <iostream>
+#include <libgen.h>
+#include <sstream>
+#include <string>
+#include <typeinfo>
+
+using namespace std;
+
+void print (double base, int exponent, double result) {
+   cout << "powi (" << base << ", " << exponent << ") = "
+        << result << endl;
+}
+
+double powi (double base, int exponent) {
+   double result = 1.0;
+   print (base, exponent, result);
+   if (exponent < 0) {
+      base = 1.0 / base;
+      exponent = - exponent;
+      print (base, exponent, result);
+   }
+   while (exponent > 0) {
+      if (exponent % 2 == 0) { /* is even */
+         base *= base;
+         exponent /= 2;
+      }else {
+         result *= base;
+         --exponent;
+      }
+      print (base, exponent, result);
+   }
+   return result;
+}
+
+int main (int argc, char **argv) {
+   if (argc % 2 != 1) {
+      cerr << "Usage: " << basename (argv[0]) << " [base expt]..."
+           << endl;
+      return EXIT_FAILURE;
+   }
+   for (int argi = 1; argi + 1 < argc; argi += 2) {
+      double base = atof (argv[argi]);
+      int exponent = atoi (argv[argi + 1]);
+      double result = powi (base, exponent);
+      cout << "ANSWER: ";
+      print (base, exponent, result);
+   }
+   return EXIT_SUCCESS;
+}
+@
+
+
+1.1
+log
+@-
+@
+text
+@d1 1
+a1 1
+/* $Id: powi.cc,v 1.1 2012-04-12 20:34:43-07 - - $ */
+a3 1
+//
+@

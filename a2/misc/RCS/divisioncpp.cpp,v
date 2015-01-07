@@ -1,0 +1,232 @@
+head	1.6;
+access;
+symbols;
+locks;
+comment	@// @;
+
+
+1.6
+date	2013.06.27.20.24.33;	author -;	state -;
+branches;
+next	1.5;
+
+1.5
+date	2013.06.27.20.23.49;	author -;	state -;
+branches;
+next	1.4;
+
+1.4
+date	2013.06.27.20.22.28;	author -;	state -;
+branches;
+next	1.3;
+
+1.3
+date	2013.06.27.20.22.09;	author -;	state -;
+branches;
+next	1.2;
+
+1.2
+date	2013.06.27.20.19.59;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2013.06.27.20.16.08;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.6
+log
+@-
+@
+text
+@// $Id: divisioncpp.cpp,v 1.5 2013-06-27 13:23:49-07 - - $
+
+#include <cstdlib>
+#include <iostream>
+#include <stdexcept>
+
+using namespace std;
+
+typedef unsigned long ulong;
+typedef pair<ulong,ulong> uupair;
+
+uupair divide (const ulong &dividend, const ulong &divisor) {
+   if (divisor == 0) throw domain_error ("divide(_,0)");
+   ulong powerof2 = 1;
+   ulong divisor_copy = divisor;
+   while (divisor_copy < dividend) {
+      divisor_copy *= 2;
+      powerof2 *= 2;
+   }
+   ulong quotient = 0;
+   ulong remainder = dividend;
+   while (powerof2 > 0) {
+      if (divisor_copy <= remainder) {
+         remainder -= divisor_copy;
+         quotient += powerof2;
+      }
+      divisor_copy /= 2;
+      powerof2 /= 2;
+   }
+   return uupair (quotient, remainder);
+}
+
+
+ostream &operator<< (ostream &out, const uupair &pair) {
+   out << pair.first << " R " << pair.second;
+   return out;
+}
+
+uupair tests[] = {
+   {             0L, 1024L},
+   {             5L,    7L},
+   {           100L,    0L},
+   {           100L,   50L},
+   {           320L,   20L},
+   {           963L,   71L},
+   {12345678912345L, 9876L},
+};
+
+int main (int argc, char **argv) {
+   (void) argc; // warning: unused parameter 'argc'
+   (void) argv; // warning: unused parameter 'argv'
+   uupair *testend = tests + sizeof tests / sizeof *tests;
+   for (uupair *itor = tests; itor < testend; ++itor) {
+      ulong dividend = itor->first;
+      ulong divisor = itor->second;
+      cout << dividend << " / " << divisor << " = ";
+      try {
+         uupair result = divide (dividend, divisor);
+         cout << result;
+         uupair tested = uupair (dividend / divisor,
+                                 dividend % divisor);
+         if (tested != result) {
+            cout << ": wrong " << tested;
+         }
+      }catch (domain_error &error) {
+         cout << "domain_error: " << error.what();
+      }
+      cout << endl;
+   }
+   return EXIT_SUCCESS;
+}
+
+//TEST// ./divisioncpp 2>&1 >divisioncpp.output
+//TEST// mkpspdf divisioncpp.ps divisioncpp.cpp* divisioncpp.output
+
+@
+
+
+1.5
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: divisioncpp.cpp,v 1.4 2013-06-27 13:22:28-07 - - $
+d15 3
+a17 2
+   while (divisor < dividend) {
+      divisor *= 2;
+d23 2
+a24 2
+      if (divisor <= remainder) {
+         remainder -= divisor;
+d27 1
+a27 1
+      divisor /= 2;
+@
+
+
+1.4
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: divisioncpp.cpp,v 1.3 2013-06-27 13:22:09-07 - - $
+d12 1
+a12 1
+uupair divide (ulong dividend, ulong divisor) {
+a13 1
+   ulong subtrahend = divisor;
+d15 2
+a16 2
+   while (subtrahend < dividend) {
+      subtrahend *= 2;
+d22 2
+a23 2
+      if (subtrahend <= remainder) {
+         remainder -= subtrahend;
+d26 1
+a26 1
+      subtrahend /= 2;
+@
+
+
+1.3
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: divisioncpp.cpp,v 1.2 2013-06-27 13:19:59-07 - - $
+d33 1
+@
+
+
+1.2
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: divisioncpp.cpp,v 1.1 2013-06-27 13:16:08-07 - - $
+d33 5
+a47 6
+template <typename first, typename second>
+ostream &operator<< (ostream &out, const pair<first, second> &pair) {
+   out << pair.first << " R " << pair.second;
+   return out;
+}
+
+d65 1
+a65 1
+         cout << ": domain_error: " << error.what();
+@
+
+
+1.1
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: divisioncpp.cpp,v 1.2 2013-04-02 15:44:32-07 - - $
+a41 1
+auto testend = tests + sizeof tests / sizeof *tests;
+d43 3
+a45 2
+ostream &operator<< (ostream &out, const uupair &uupair) {
+   out << uupair.first << " R " << uupair.second;
+d52 2
+a53 1
+   for (auto itor = tests; itor < testend; ++itor) {
+d58 1
+a58 1
+         auto result = divide (dividend, divisor);
+d60 2
+a61 1
+         auto tested = uupair (dividend / divisor, dividend % divisor);
+@

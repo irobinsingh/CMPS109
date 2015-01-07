@@ -1,0 +1,42 @@
+pwd
+ls
+make foo this is a test
+make bar test a is this
+ls
+cat food
+cat foo
+echo O for a muse of fire
+prompt =>
+rm bar
+make baz foo bar baz
+mkdir test
+prompt % 
+ls /
+cd test
+pwd
+cd
+pwd
+cd test
+pwd
+cd ..
+pwd
+cd test
+make me me me me
+cat me
+cd ..
+cd test
+cat me
+me me me
+cd
+lsr
+cd test
+mkdir foo
+cd foo
+mkdir bar
+cd bar
+mkdir baz
+cd baz
+ls .
+cd /
+lsr test
+exit
